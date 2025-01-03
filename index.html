@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Expense Analysis Tool</h1>
+    </header>
+    <main>
+        <!-- Section for Input -->
+        <section class="input-section">
+            <form id="expense-form">
+                <label for="amount">Amount:</label>
+                <input id="amount" type="text" placeholder="Enter amount" required>
+
+                <label for="date">Date:</label>
+                <input id="date" type="date" required>
+
+                <!-- <input id="category" type="text" placeholder="Enter category" required> -->
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="income">Income</option>
+                    <option value="food">Food</option>
+                    <option value="accomodation">Accomodation</option>
+                    <option value="loan">Loan payment</option>
+                    <option value="phone">Phone</option>
+                    <option value="self-care">Self-care</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <button type="button">Add</button>
+            </form>
+        </section>
+
+        <!-- Section for Power BI Overview -->
+        <section class="overview">
+            <h2>Power BI Overview</h2>
+            <div class="powerbi-container">
+                <iframe title="finance report" 
+                    width="1140" 
+                    height="541.25" 
+                    src="https://app.powerbi.com/reportEmbed?reportId=f721fee3-b590-455d-83c2-d49f23f50b4a&autoAuth=true&ctid=42ea3d44-e2af-475e-8222-65551624c9e7" 
+                    frameborder="0" 
+                    allowFullScreen="true">
+                </iframe>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+
+    <script>
+        const saveData = () => {
+        const amount = document.querySelector("#amount").value.trim();
+        const date = document.querySelector("#date").value;
+        const category = document.querySelector("#category").value.trim();
+
+        // Validate inputs
+        if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
+            alert("Please enter a valid amount.");
+            return;
+        }
+        if (!date) {
+            alert("Please select a valid date.");
+            return;
+        }
+        if (!category) {
+            alert("Please enter a category.");
+            return;
+        }
+
+        // Send data to the server
+        fetch('http://127.0.0.1:5000/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount, date, category }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+        };
+
+        // Attach event listener to the Add button
+        document.querySelector("button").addEventListener("click", saveData);
+
+    </script>
+</body>
+</html>
+

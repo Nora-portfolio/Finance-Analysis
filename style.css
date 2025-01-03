@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #0078D7;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.input-section {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.input-section input, .input-section button {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-section button {
+    background-color: #0078D7;
+    color: white;
+    cursor: pointer;
+}
+
+.input-section button:hover {
+    background-color: #005A9E;
+}
+
+.overview {
+    /* padding: 1rem; */
+    text-align: center;
+}
+
+
+/* Power BI iframe container styling */
+.powerbi-container {
+    width: 100%; /* Adjust the width as needed */
+    max-width: 1200px; /* Optional: set a max width */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    background-color: #f5f5f5; /* Light background for contrast */
+    border: 2px solid #ddd; /* Border around the iframe */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  /* Power BI iframe styling */
+  .powerbi-iframe {
+    width: 100%;
+    height: 800px; /* Adjust the height as needed */
+    border: none; /* Remove default iframe border */
+    border-radius: 8px; /* Match the container's border-radius */
+  }
+  
